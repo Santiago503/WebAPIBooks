@@ -44,8 +44,8 @@ namespace WebAPIBooks.Services
                 var Books = JsonConvert.DeserializeObject<Books>(result);
                 return Books;
             }
-        }
-
+        } 
+       
 
         //handle HttpCLient for ReadAsString
         private async Task<string> GethttClientReadAsString(string url) 

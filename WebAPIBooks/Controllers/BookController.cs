@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using WebAPIBooks.Models;
 using WebAPIBooks.Services;
@@ -20,7 +21,7 @@ namespace WebAPIBooks.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Books>>> Get()
+        public async Task<ActionResult<IEnumerable<Books>>> GetAllBooks()
         {
             try
             {
@@ -42,10 +43,29 @@ namespace WebAPIBooks.Controllers
 
                 return Ok(new { Succeeded = true, Message = "Respuesta Exitosa", Data = book });
             }
-            catch (Exception ex)
+            catch (HttpRequestException ex)
             {
                 return BadRequest(new { Succeeded = false, Message = ex.Message, Data = "" });
             }
         }
+
+        [HttpPost]
+        public async Task<ActionResult<Books>> PostBooks( Books books)
+        {
+            try
+            {
+                var book = await _bookServices.PostBook(books);
+
+                return CreatedAtAction("GetAllBooks", book);
+            }
+            catch (HttpRequestException ex)
+            {
+                return BadRequest(new { Succeeded = false, Message = ex.Message, Data = "", StatusCode = ex.StatusCode });
+            }
+        }
+
+       
+
+
     }
 }
