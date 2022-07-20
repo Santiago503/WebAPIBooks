@@ -64,7 +64,20 @@ namespace WebAPIBooks.Controllers
             }
         }
 
-       
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Books>> PutBooks(int id, Books books)
+        {
+            try
+            {
+                var book = await _bookServices.PutBook(id, books);
+
+                return NoContent();
+            }
+            catch (HttpRequestException ex)
+            {
+                return BadRequest(new { Succeeded = false, Message = ex.Message, Data = "", StatusCode = ex.StatusCode });
+            }
+        }
 
 
     }

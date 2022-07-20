@@ -45,7 +45,22 @@ namespace WebAPIBooks.Services
                 return Books;
             }
         } 
-       
+        
+        public async Task<Books> PutBook(int id, Books book)
+        {
+            var url = UrlBaseApi + $"/Books/{id}";
+            using (var httpClient = new HttpClient())
+            {
+                using var response = await httpClient.PutAsJsonAsync(url, book);
+                response.EnsureSuccessStatusCode();
+                var result = await response.Content.ReadAsStringAsync();
+
+                var Book = JsonConvert.DeserializeObject<Books>(result);
+                return Book;
+            }
+        }
+
+
 
         //handle HttpCLient for ReadAsString
         private async Task<string> GethttClientReadAsString(string url) 
