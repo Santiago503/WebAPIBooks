@@ -32,6 +32,7 @@ namespace WebAPIBooks
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Web API for Books", Version = "v1" });
+                c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             });
 
         }
@@ -44,6 +45,7 @@ namespace WebAPIBooks
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIBooks v1"));
+                
             }
 
             app.UseRouting();

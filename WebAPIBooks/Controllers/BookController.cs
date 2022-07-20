@@ -49,6 +49,22 @@ namespace WebAPIBooks.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+        [Route("Authors/{id}")]
+        public async Task<ActionResult<List<Authors>>> GetAuthorsByBook(int id)
+        {
+            try
+            {
+                var book = await _bookServices.GetAuthorsByBooks(id);
+
+                return Ok(new { Succeeded = true, Message = "Respuesta Exitosa", Data = book });
+            }
+            catch (HttpRequestException ex)
+            {
+                return BadRequest(new { Succeeded = false, Message = ex.Message, Data = "", StatusCode = ex.StatusCode });
+            }
+        }
+
         [HttpPost]
         public async Task<ActionResult<Books>> PostBooks( Books books)
         {

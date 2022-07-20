@@ -32,6 +32,15 @@ namespace WebAPIBooks.Services
             return Books;
         }
 
+        public async Task<List<Authors>> GetAuthorsByBooks(int idBook)
+        {
+            var url = UrlBaseApi + $"/Authors/authors/books/{idBook}";
+            var result = await GethttClientReadAsString(url);
+
+            var Authors = JsonConvert.DeserializeObject<List<Authors>>(result);
+            return Authors;
+        }
+
         public async Task<Books> PostBook(Books book)
         {
             var url = UrlBaseApi + "/Books";
