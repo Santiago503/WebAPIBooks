@@ -59,7 +59,21 @@ namespace WebAPIBooks.Services
                 return Book;
             }
         }
+        
+        public async Task<Books> DeleteBook(int id)
+        {
 
+            var url = UrlBaseApi + $"/Books/{id}";
+            using (var httpClient = new HttpClient())
+            {
+                using var response = await httpClient.DeleteAsync(url);
+                response.EnsureSuccessStatusCode();
+                var result = await response.Content.ReadAsStringAsync();
+
+                var Book = JsonConvert.DeserializeObject<Books>(result);
+                return Book;
+            }
+        }
 
 
         //handle HttpCLient for ReadAsString

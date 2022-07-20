@@ -28,9 +28,9 @@ namespace WebAPIBooks.Controllers
                 var books = await _bookServices.GetAllBooks();
                 return Ok(new { Succeeded = true, Message = "Respuesta Exitosa", Data = books });
             }
-            catch (Exception ex)
+            catch (HttpRequestException ex)
             {
-                return BadRequest(new { Succeeded = false, Message = ex.Message, Data = "" });
+                return BadRequest(new { Succeeded = false, Message = ex.Message, Data = "", StatusCode = ex.StatusCode });
             }
         }
 
@@ -45,7 +45,7 @@ namespace WebAPIBooks.Controllers
             }
             catch (HttpRequestException ex)
             {
-                return BadRequest(new { Succeeded = false, Message = ex.Message, Data = "" });
+                return BadRequest(new { Succeeded = false, Message = ex.Message, Data = "", StatusCode = ex.StatusCode });
             }
         }
 
@@ -69,9 +69,28 @@ namespace WebAPIBooks.Controllers
         {
             try
             {
+                var oneBook = await _bookServices.GetBook(id);//validate if exit
+
                 var book = await _bookServices.PutBook(id, books);
 
                 return NoContent();
+            }
+            catch (HttpRequestException ex)
+            {
+                return BadRequest(new { Succeeded = false, Message = ex.Message, Data = "", StatusCode = ex.StatusCode });
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Books>> DeleteStatus(int id)
+        {
+            try
+            {
+                var oneBook = await _bookServices.GetBook(id);//validate if exit
+
+                var book = await _bookServices.DeleteBook(id);
+
+                return Accepted();
             }
             catch (HttpRequestException ex)
             {
