@@ -49,7 +49,7 @@ namespace WebAPIBooks.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
         [Route("Authors/{id}")]
         public async Task<ActionResult<List<Authors>>> GetAuthorsByBook(int id)
         {
