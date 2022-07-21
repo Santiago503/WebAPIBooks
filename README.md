@@ -9,4 +9,4 @@ Api for BookStore consume external api with test data, note: The service is a Fa
 
 ### Libraries and Framework
    Asp Net Core 5
-   Api Externa[htps://fakerestapi.azurewebsites.net/index.html]
+   Api Externa[https://fakerestapi.azurewebsites.net/index.html]
