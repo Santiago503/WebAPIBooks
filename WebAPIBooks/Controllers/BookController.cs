@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using WebAPIBooks.Models;
@@ -30,6 +31,10 @@ namespace WebAPIBooks.Controllers
             }
             catch (HttpRequestException ex)
             {
+                if (ex.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return NotFound();
+                }
                 return BadRequest(new { Succeeded = false, Message = ex.Message, Data = "", StatusCode = ex.StatusCode });
             }
         }
@@ -45,6 +50,10 @@ namespace WebAPIBooks.Controllers
             }
             catch (HttpRequestException ex)
             {
+                if (ex.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return NotFound();
+                }
                 return BadRequest(new { Succeeded = false, Message = ex.Message, Data = "", StatusCode = ex.StatusCode });
             }
         }
@@ -61,6 +70,10 @@ namespace WebAPIBooks.Controllers
             }
             catch (HttpRequestException ex)
             {
+                if (ex.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return NotFound();
+                }
                 return BadRequest(new { Succeeded = false, Message = ex.Message, Data = "", StatusCode = ex.StatusCode });
             }
         }
@@ -76,6 +89,10 @@ namespace WebAPIBooks.Controllers
             }
             catch (HttpRequestException ex)
             {
+                if (ex.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return NotFound();
+                }
                 return BadRequest(new { Succeeded = false, Message = ex.Message, Data = "", StatusCode = ex.StatusCode });
             }
         }
@@ -93,6 +110,10 @@ namespace WebAPIBooks.Controllers
             }
             catch (HttpRequestException ex)
             {
+                if(ex.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return NotFound();
+                }
                 return BadRequest(new { Succeeded = false, Message = ex.Message, Data = "", StatusCode = ex.StatusCode });
             }
         }
@@ -110,6 +131,10 @@ namespace WebAPIBooks.Controllers
             }
             catch (HttpRequestException ex)
             {
+                if (ex.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return NotFound();
+                }
                 return BadRequest(new { Succeeded = false, Message = ex.Message, Data = "", StatusCode = ex.StatusCode });
             }
         }
